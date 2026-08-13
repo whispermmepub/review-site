@@ -57,6 +57,9 @@ function runBoot() {
     if (fill) fill.style.width = p + "%";
   }, 110);
 
+  // Failsafe: never leave the boot screen stuck even if the timer stalls.
+  setTimeout(finishBoot, 4500);
+
   const skip = () => { clearInterval(timer); finishBoot(); };
   document.addEventListener("keydown", skip, { once: true });
   document.addEventListener("click", skip, { once: true });
@@ -209,10 +212,48 @@ function fullPost(id) {
 }
 
 /* ── Article view ──────────────────────────────────────── */
+const SITE_META = {
+  title: "Whisper Of Words — Book Review Terminal",
+  description: "မြန်မာစာအုပ်စာအညွှန်းများ စုစည်းမှု — Free Myanmar book reviews & recommendations.",
+  url: "https://whisperofwords-review.pages.dev/",
+  image: "https://whisperofwords-review.pages.dev/assets/og-cover.png",
+};
+
+function setMeta(property, content) {
+  let el = document.querySelector(`meta[property="${property}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute("property", property);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", content);
+}
+
+function plainText(s) {
+  return String(s || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function applyPostMeta(post) {
+  document.title = `${post.title} — Whisper Of Words`;
+  setMeta("og:title", post.title);
+  setMeta("og:description", plainText(post.excerpt || post.title).slice(0, 200));
+  setMeta("og:url", `${location.origin}/review/${post.id}`);
+  setMeta("og:image", post.image || SITE_META.image);
+}
+
+function resetMeta() {
+  document.title = SITE_META.title;
+  setMeta("og:title", SITE_META.title);
+  setMeta("og:description", SITE_META.description);
+  setMeta("og:url", SITE_META.url);
+  setMeta("og:image", SITE_META.image);
+}
+
 function openPost(id) {
   const post = POSTS.find((p) => String(p.id) === String(id));
   if (!post) return;
   currentPostId = id;
+  applyPostMeta(post);
   if (window.history && window.history.pushState) {
     window.history.pushState({ post: id }, "", `/review/${id}`);
   } else {
@@ -239,6 +280,7 @@ function openPost(id) {
 
 function closePost() {
   currentPostId = null;
+  resetMeta();
   if (window.history && window.history.pushState && location.pathname.startsWith("/review/")) {
     window.history.pushState({}, "", "/");
   } else if (location.hash) {

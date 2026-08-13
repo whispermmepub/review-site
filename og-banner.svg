@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7df8a"/>
+      <stop offset="25%" stop-color="#e9b93b"/>
+      <stop offset="50%" stop-color="#f9e6a0"/>
+      <stop offset="75%" stop-color="#d99b1f"/>
+      <stop offset="100%" stop-color="#f0cd62"/>
+    </linearGradient>
+    <radialGradient id="bg" cx="40%" cy="35%" r="90%">
+      <stop offset="0%" stop-color="#332e26"/>
+      <stop offset="100%" stop-color="#1d1b17"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="22" y="22" width="1156" height="586" rx="42" fill="none" stroke="url(#gold)" stroke-width="6"/>
+  <rect x="36" y="36" width="1128" height="558" rx="32" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity=".45"/>
+  <image xlink:href="logo.svg" x="435" y="78" width="330" height="330"/>
+  <text x="600" y="478" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" fill="url(#gold)">Whisper Of Words</text>
+  <text x="600" y="530" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" letter-spacing="10" fill="#e9b93b">BOOK REVIEW TERMINAL</text>
+</svg>
