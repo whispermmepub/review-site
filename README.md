@@ -6,14 +6,22 @@ Static HTML/CSS/JS သက်သက်မို့ framework မလို၊ Clou
 ## Site Links
 
 - **Live (Cloudflare Pages):** https://whisperofwords-review.pages.dev
+- **Custom domain (setup in progress):** https://reviews.saroatsin.com
 - **Original GitHub Pages:** https://whispermmepub.github.io/Review/
 - **Review repo:** https://github.com/whispermmepub/Review
+
+### Pretty URLs
+
+- Post ဖတ်ရန်: `https://whisperofwords-review.pages.dev/review/2` (တချင်းချင်း link)
+- Main page: `https://whisperofwords-review.pages.dev/`
+- Cloudflare Pages `_redirects` + path routing နဲ့ `/review/<id>` ကို support လုပ်ထားတယ်
 
 ## Features
 
 - 🖥️ Retro terminal boot animation
 - 📚 Review post 109 ခု — ရှာဖွေနိုင်၊ နှစ်အလိုက် filter လုပ်နိုင်
 - 📖 ပို့စ်တိုင်းရဲ့ အပြည့်အစုံ content — site ထဲမှာ တိုက်ရိုက် ဖတ်လို့ရ
+- 🔗 Post တိုင်းမှာ လှတဲ့ URL — `/review/<id>` (ဥပမာ `/review/2`)
 - 🔖 Save for Later (localStorage bookmark)
 - 📤 Telegram / Facebook / Viber share buttons
 - ⏰ Live clock, date, signal, battery status bar

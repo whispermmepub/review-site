@@ -227,7 +227,11 @@ function openPost(id) {
   const post = POSTS.find((p) => String(p.id) === String(id));
   if (!post) return;
   currentPostId = id;
-  location.hash = `/post/${id}`;
+  if (window.history && window.history.pushState) {
+    window.history.pushState({ post: id }, "", `/review/${id}`);
+  } else {
+    location.hash = `/post/${id}`;
+  }
   document.querySelectorAll("#tabs button").forEach((b) => b.classList.remove("active"));
   document.querySelectorAll(".panel").forEach((p) => p.classList.toggle("active", p.id === "post-view"));
   $("#win-title").textContent = "read.exe";
@@ -249,7 +253,11 @@ function openPost(id) {
 
 function closePost() {
   currentPostId = null;
-  if (location.hash) history.replaceState(null, "", location.pathname);
+  if (window.history && window.history.pushState && location.pathname.startsWith("/review/")) {
+    window.history.pushState({}, "", "/");
+  } else if (location.hash) {
+    history.replaceState(null, "", location.pathname);
+  }
   switchTab("home");
 }
 
@@ -270,7 +278,8 @@ function renderArticle(sum, full) {
     .map((t) => `<span>#${escapeHtml(t)}</span>`).join("");
   const mins = full && full.body ? readingTime(full.body) : 0;
   const cover = full && full.image ? full.image : sum.image;
-  const url = encodeURIComponent(location.href.split("#")[0] + "#/post/" + sum.id);
+  const canonical = location.origin + "/review/" + sum.id;
+  const url = encodeURIComponent(canonical);
   const title = encodeURIComponent(sum.title);
 
   el.innerHTML = `
@@ -301,8 +310,7 @@ function renderArticle(sum, full) {
   const copy = el.querySelector("#btn-copy-link");
   if (copy) {
     copy.addEventListener("click", () => {
-      const link = location.href.split("#")[0] + "#/post/" + sum.id;
-      navigator.clipboard.writeText(link).then(() => {
+      navigator.clipboard.writeText(canonical).then(() => {
         copy.textContent = "✅ Copied!";
         setTimeout(() => { copy.textContent = "🔗 Copy Link"; }, 1600);
       });
@@ -393,10 +401,17 @@ function renderLinks() {
     </div>`;
 }
 
-/* ── Hash routing ──────────────────────────────────────── */
-function handleHash() {
-  const m = location.hash.match(/^#\/post\/(\d+)/);
-  if (m && String(m[1]) !== String(currentPostId)) openPost(m[1]);
+/* ── Routing (path /review/<id> + legacy hash) ────────── */
+function postIdFromUrl() {
+  const m = location.pathname.match(/^\/review\/(\d+)/);
+  if (m) return m[1];
+  const h = location.hash.match(/^#\/post\/(\d+)/);
+  return h ? h[1] : null;
+}
+
+function handleLocation() {
+  const id = postIdFromUrl();
+  if (id && String(id) !== String(currentPostId)) openPost(id);
 }
 
 /* ── Status bar (live clock + battery) ─────────────────── */
@@ -464,10 +479,11 @@ function init() {
   renderLinks();
   $("#site-footer").textContent = `System Ready • ${year} — © ${CONFIG.name}`;
   switchTab("home");
-  window.addEventListener("hashchange", handleHash);
+  window.addEventListener("popstate", handleLocation);
+  window.addEventListener("hashchange", handleLocation);
   loadFullPosts();
   runBoot();
-  if (location.hash) setTimeout(handleHash, 50);
+  setTimeout(handleLocation, 50);
 }
 
 document.addEventListener("DOMContentLoaded", init);
