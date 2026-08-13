@@ -1,4 +1,10 @@
 /* ── Theme ─────────────────────────────────────────────── */
+@font-face {
+  font-family: "Burma001";
+  src: url("assets/fonts/Burma001-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
 :root {
   --paper: #e9e4db;
   --paper-2: #e2ddd4;
@@ -14,7 +20,7 @@
   --radius: 14px;
   --mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --my: "Noto Sans Myanmar", "Padauk", "Myanmar Text", "Manrope", sans-serif;
+  --my: "Burma001", "Noto Sans Myanmar", "Padauk", "Myanmar Text", "Manrope", sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,28 +54,62 @@ body {
 #boot.done { opacity: 0; pointer-events: none; }
 
 .boot-card {
-  max-width: min(92vw, 560px);
-  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: min(88vw, 380px);
+  padding: 34px 40px 28px;
   font-family: var(--mono);
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   border: 1px solid rgba(29, 27, 23, 0.1);
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  animation: bootpop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-#boot-lines { font-size: 13px; line-height: 1.9; letter-spacing: 0.06em; }
-#boot-lines .ok { color: var(--green); }
-#boot-lines .cursor { display: inline-block; width: 8px; height: 1em; background: var(--ink); vertical-align: middle; animation: blink 1s steps(1) infinite; }
-#boot-hint {
+.boot-logo {
+  width: 96px;
+  height: 96px;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 6px 14px rgba(29, 27, 23, 0.25));
+}
+.boot-title {
   margin-top: 14px;
-  font-size: 10px;
-  letter-spacing: 0.3em;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(29, 27, 23, 0.55);
-  animation: blink 1.2s steps(1) infinite;
 }
-@keyframes blink { 50% { opacity: 0; } }
+.boot-sub {
+  margin-top: 4px;
+  font-size: 9.5px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.boot-bar {
+  margin-top: 20px;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(29, 27, 23, 0.12);
+  overflow: hidden;
+}
+.boot-bar span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e9b93b, #d99b1f);
+  transition: width 0.12s ease;
+}
+@keyframes bootpop {
+  from { opacity: 0; transform: scale(0.92) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
 
 /* ── App shell ─────────────────────────────────────────── */
 #app { padding: 28px 16px 40px; }
@@ -160,7 +200,7 @@ body {
   text-transform: uppercase;
 }
 .hero h1 .caret { display: inline-block; width: 2px; height: 1em; background: var(--ink); vertical-align: middle; margin-left: 2px; animation: blink 1s steps(1) infinite; }
-.hero p { margin-top: 10px; font-family: var(--my); font-size: 14.5px; line-height: 1.7; color: rgba(29,27,23,.8); max-width: 62ch; }
+.hero p { margin-top: 10px; font-family: var(--my); font-size: 16px; line-height: 1.75; color: rgba(29,27,23,.8); max-width: 62ch; }
 
 .hero-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
 .hero-stats .stat {
@@ -179,7 +219,7 @@ body {
   flex: 1;
   min-width: 220px;
   font-family: var(--my);
-  font-size: 14px;
+  font-size: 15.5px;
   padding: 11px 14px;
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -230,13 +270,13 @@ body {
   font-size: 44px; opacity: 0.85;
 }
 .card-body { padding: 14px 15px 15px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
-.card-meta { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 8px; }
-.card-title { font-family: var(--my); font-size: 15px; font-weight: 700; line-height: 1.5; }
-.card-excerpt { font-family: var(--my); font-size: 12.5px; line-height: 1.65; color: rgba(29,27,23,.72); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 8px; }
+.card-title { font-family: var(--my); font-size: 16.5px; font-weight: 700; line-height: 1.5; }
+.card-excerpt { font-family: var(--my); font-size: 13.5px; line-height: 1.7; color: rgba(29,27,23,.72); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
 .card-tags span { font-family: var(--mono); font-size: 10px; padding: 3px 7px; border-radius: 5px; background: rgba(29,27,23,.07); color: var(--ink-soft); }
 
-.no-results { padding: 60px 20px; text-align: center; font-family: var(--my); font-size: 14px; color: var(--ink-soft); grid-column: 1 / -1; }
+.no-results { padding: 60px 20px; text-align: center; font-family: var(--my); font-size: 15px; color: var(--ink-soft); grid-column: 1 / -1; }
 .loading { padding: 40px; text-align: center; font-family: var(--mono); font-size: 13px; color: var(--ink-soft); grid-column: 1 / -1; }
 
 /* ── Article view ──────────────────────────────────────── */
@@ -261,7 +301,7 @@ body {
 
 .article-head { margin-bottom: 18px; }
 .article-head .post-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
-.article-head h1 { font-family: var(--my); font-size: clamp(20px, 3.4vw, 30px); font-weight: 800; line-height: 1.4; }
+.article-head h1 { font-family: var(--my); font-size: clamp(22px, 3.6vw, 32px); font-weight: 800; line-height: 1.4; }
 .article-head .reading-time { font-family: var(--mono); font-size: 11px; color: var(--amber); margin-top: 8px; }
 
 .article-cover {
@@ -277,8 +317,8 @@ body {
 
 .article-body {
   font-family: var(--my);
-  font-size: 15.5px;
-  line-height: 1.95;
+  font-size: 17.5px;
+  line-height: 2;
   color: rgba(29, 27, 23, 0.88);
 }
 .article-body p { margin-bottom: 1.1em; }
@@ -379,7 +419,7 @@ body {
   padding: 6px 12px;
   border-radius: 6px;
 }
-.about-bio { margin-top: 16px; font-family: var(--my); font-size: 15px; line-height: 1.8; color: rgba(29,27,23,.82); max-width: 64ch; }
+.about-bio { margin-top: 16px; font-family: var(--my); font-size: 16.5px; line-height: 1.85; color: rgba(29,27,23,.82); max-width: 64ch; }
 
 .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-top: 20px; }
 .contact-card {
@@ -396,7 +436,7 @@ body {
 }
 .contact-card:hover { transform: translateY(-3px); box-shadow: 5px 5px 0 rgba(29,27,23,.09); }
 .contact-card .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
-.contact-card .value { font-family: var(--my); font-size: 13.5px; font-weight: 700; word-break: break-all; line-height: 1.5; }
+.contact-card .value { font-family: var(--my); font-size: 14.5px; font-weight: 700; word-break: break-all; line-height: 1.5; }
 
 /* Footer */
 #site-footer {
@@ -438,8 +478,9 @@ body {
   box-shadow: 4px 4px 0 rgba(29, 27, 23, 0.07);
   backdrop-filter: blur(6px);
 }
-.sb-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.sb-avatar { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); background: rgba(255,255,255,.4); }
+.sb-left { font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.sb-logo { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.sb-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); background: rgba(255,255,255,.4); }
 .sb-name { font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sb-center { font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); white-space: nowrap; }
 .sb-right { display: flex; align-items: center; gap: 10px; }
@@ -456,6 +497,6 @@ body {
 .batt .fill { position: absolute; left: 1px; top: 1px; bottom: 1px; width: 70%; background: var(--green); border-radius: 1px; transition: width 0.3s ease; }
 .batt-txt { font-size: 11px; min-width: 34px; }
 @media (max-width: 560px) {
-  .sb-center { display: none; }
+  .sb-left { display: none; }
   .sb-name { max-width: 120px; }
 }

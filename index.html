@@ -19,19 +19,21 @@
     <!-- Boot screen -->
     <div id="boot" aria-hidden="false">
       <div class="boot-card">
-        <div id="boot-lines"></div>
-        <div id="boot-hint">press any key to skip</div>
+        <img class="boot-logo" src="logo.svg" alt="Whisper Of Words" />
+        <div class="boot-title">Whisper Of Words</div>
+        <div class="boot-sub">BOOK REVIEW TERMINAL</div>
+        <div class="boot-bar"><span id="boot-fill"></span></div>
       </div>
     </div>
 
     <!-- Main app -->
     <div id="app" class="hidden">
       <div class="statusbar">
-        <div class="sb-left">
-          <img class="sb-avatar" id="sb-avatar" alt="avatar" />
+        <div class="sb-left" id="sb-date"></div>
+        <div class="sb-center sb-logo">
+          <img class="sb-avatar" id="sb-avatar" alt="logo" />
           <span class="sb-name" id="sb-name"></span>
         </div>
-        <div class="sb-center" id="sb-date"></div>
         <div class="sb-right">
           <span class="sb-time" id="sb-time"></span>
           <span class="sb-signal" title="Signal"><i></i><i></i><i></i><i></i></span>

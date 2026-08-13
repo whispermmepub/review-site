@@ -43,37 +43,19 @@ const TABS = [
   ["links", "links.exe"],
 ];
 
-/* ── Boot screen ───────────────────────────────────────── */
-function bootLines() {
-  return [
-    `INITIALIZING ${CONFIG.bootName} v2.0...`,
-    "LOADING BOOK DATABASE [OK]",
-    "MOUNTING FILE SYSTEM [OK]",
-    "FETCHING REVIEWS.EXE [OK]",
-    "CONNECTING TO LIBRARY NEXUS...",
-    "ESTABLISHING SECURE CONNECTION [OK]",
-    "INDEXING SHELVES [OK]",
-    `Library Ready • ${POSTS.length} titles • ${year}`,
-  ];
-}
-
+/* ── Boot screen (fast load) ──────────────────────────── */
 function runBoot() {
-  const linesEl = $("#boot-lines");
-  const lines = bootLines();
-  let i = 0;
+  const fill = $("#boot-fill");
+  let p = 0;
   const timer = setInterval(() => {
-    const line = document.createElement("div");
-    const isLast = i === lines.length - 1;
-    line.innerHTML =
-      lines[i].replace("[OK]", '<span class="ok">[OK]</span>') +
-      (isLast ? '<span class="cursor"></span>' : "");
-    linesEl.appendChild(line);
-    i++;
-    if (i >= lines.length) {
+    p += 12 + Math.random() * 22;
+    if (p >= 100) {
+      p = 100;
       clearInterval(timer);
-      setTimeout(() => finishBoot(), 900);
+      setTimeout(() => finishBoot(), 220);
     }
-  }, 300);
+    if (fill) fill.style.width = p + "%";
+  }, 110);
 
   const skip = () => { clearInterval(timer); finishBoot(); };
   document.addEventListener("keydown", skip, { once: true });
@@ -85,7 +67,7 @@ function finishBoot() {
   if (!boot || boot.classList.contains("done")) return;
   boot.classList.add("done");
   $("#app").classList.remove("hidden");
-  setTimeout(() => boot.remove(), 600);
+  setTimeout(() => boot.remove(), 450);
 }
 
 /* ── Tabs ──────────────────────────────────────────────── */
