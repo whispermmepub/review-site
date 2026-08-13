@@ -53,5 +53,5 @@ Actions tab ကနေ **Sync Review Posts & Deploy** ကို `Run workflow` �
 ## Deploy
 
 ```bash
-npx wrangler pages deploy review-site --project-name=whisperofwords-review
+npx wrangler pages deploy . --project-name=whisperofwords-review
 ```
