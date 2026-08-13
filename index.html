@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="my">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whisper Of Words — Book Review Terminal</title>
+    <meta name="description" content="Whisper Of Words Mmepub — မြန်မာစာအုပ်စာအညွှန်းများ စုစည်းမှု။ Free Myanmar book reviews & recommendations." />
+    <meta property="og:title" content="Whisper Of Words — Book Review Terminal" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Boot screen -->
+    <div id="boot" aria-hidden="false">
+      <div class="boot-card">
+        <div id="boot-lines"></div>
+        <div id="boot-hint">press any key to skip</div>
+      </div>
+    </div>
+
+    <!-- Main app -->
+    <div id="app" class="hidden">
+      <div class="statusbar">
+        <div class="sb-left">
+          <img class="sb-avatar" id="sb-avatar" alt="avatar" />
+          <span class="sb-name" id="sb-name"></span>
+        </div>
+        <div class="sb-center" id="sb-date"></div>
+        <div class="sb-right">
+          <span class="sb-time" id="sb-time"></span>
+          <span class="sb-signal" title="Signal"><i></i><i></i><i></i><i></i></span>
+          <span class="sb-battery">
+            <span class="batt"><span class="fill" id="sb-batt-fill"></span></span>
+            <span class="batt-txt" id="sb-batt-txt"></span>
+          </span>
+        </div>
+      </div>
+      <div class="window">
+        <div class="titlebar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="win-title">~/reviews — <span id="win-title"></span></div>
+        </div>
+        <div class="layout">
+          <nav id="tabs" aria-label="Sections"></nav>
+          <main id="content">
+            <section id="tab-home" class="panel active" data-title="home.exe"></section>
+            <section id="tab-about" class="panel" data-title="about.exe"></section>
+            <section id="tab-links" class="panel" data-title="links.exe"></section>
+            <section id="post-view" class="panel" data-title="read.exe"></section>
+          </main>
+        </div>
+      </div>
+      <footer id="site-footer"></footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
