@@ -104,9 +104,13 @@ function renderHome() {
   const years = yearsAvailable();
   const stats = `
     <div class="hero-stats">
-      <span class="stat">📚 <b>${POSTS.length}</b> စာအုပ်စာအညွှန်း</span>
-      <span class="stat">✍️ <b>${new Set(POSTS.map((p) => p.author)).size}</b> စာရေးဆရာများ</span>
-      <span class="stat">🗓️ <b>${years[0] || "—"}</b> → <b>${years[years.length - 1] || "—"}</b></span>
+      <div class="stat-row">
+        <span class="stat">📚 <b>${POSTS.length}</b> စာအုပ်စာအညွှန်း</span>
+        <span class="stat">✍️ <b>${new Set(POSTS.map((p) => p.author)).size}</b> စာရေးဆရာများ</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat">🗓️ <b>${years[0] || "—"}</b> → <b>${years[years.length - 1] || "—"}</b></span>
+      </div>
     </div>`;
 
   const chips = `<button class="chip ${activeYear === "all" ? "active" : ""}" data-year="all">ALL</button>` +
