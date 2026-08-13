@@ -6,7 +6,6 @@ Static HTML/CSS/JS သက်သက်မို့ framework မလို၊ Clou
 ## Site Links
 
 - **Live (Cloudflare Pages):** https://whisperofwords-review.pages.dev
-- **Custom domain (setup in progress):** https://reviews.saroatsin.com
 - **Original GitHub Pages:** https://whispermmepub.github.io/Review/
 - **Review repo:** https://github.com/whispermmepub/Review
 
