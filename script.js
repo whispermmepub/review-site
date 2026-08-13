@@ -514,4 +514,9 @@ function init() {
   setTimeout(handleLocation, 50);
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+  // Independent failsafe: app is never left stuck on the boot screen,
+  // even if an early init error prevents runBoot() from scheduling one.
+  setTimeout(finishBoot, 5000);
+  init();
+});
