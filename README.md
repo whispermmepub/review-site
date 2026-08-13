@@ -22,17 +22,33 @@ Static HTML/CSS/JS သက်သက်မို့ framework မလို၊ Clou
 
 ```
 review-site/
-├── index.html        # page structure
-├── styles.css        # design
-├── script.js         # app logic + post list data (embedded)
-└── data/
-    └── posts.json    # ပို့စ်အပြည့်အစုံ content (body ပါ)
+├── index.html                    # page structure
+├── styles.css                    # design
+├── script.js                     # app logic + post list data (embedded)
+├── data/
+│   └── posts.json                # ပို့စ်အပြည့်အစုံ content (body ပါ)
+├── scripts/
+│   └── build_data.py             # Review repo ကနေ data ပြန်ထုတ်တဲ့ script
+└── .github/workflows/
+    └── sync-and-deploy.yml       # နာရီတိုင်း auto sync + deploy
 ```
 
-## ပို့စ်အသစ်ထည့်နည်း
+## Auto Update 🤖
 
-`data/posts.json` ထဲကို post object အသစ် ထည့်ရုံပါပဲ။
-`script.js` ထဲက embedded summary ကိုလည်း အသစ်ရဲ့ `id, title, date, author, image, excerpt, tags, blog` နဲ့ update လုပ်ပေးပါ။
+ဒီ repo မှာ GitHub Action (`sync-and-deploy.yml`) ပါပြီးသားမို့
+မူရင်း Review repo (`whispermmepub/Review` — Blogspot auto-sync) က post အသစ်တွေ ပေါ်တာနဲ့
+**နာရီတိုင်း** အလိုအလျောက် extract လုပ်ပြီး Cloudflare Pages ကို deploy လုပ်ပေးပါတယ်။
+
+လိုအပ်တဲ့ repo secrets:
+- `CLOUDFLARE_API_TOKEN` — Cloudflare API token
+- `CLOUDFLARE_ACCOUNT_ID` — Cloudflare account ID
+
+Actions tab ကနေ **Sync Review Posts & Deploy** ကို `Run workflow` နှိပ်ပြီး အချိန်မရွေး manually run လို့လည်းရတယ်။
+
+## ပို့စ်အသစ် manually ထည့်နည်း
+
+`data/posts.json` ထဲကို post object အသစ် ထည့်ပြီး
+`python3 scripts/build_data.py /path/to/Review .` နဲ့ `script.js` ထဲက embedded summary ကို ပြန်ထုတ်ပါ။
 
 ## Deploy
 
