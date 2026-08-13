@@ -6,7 +6,7 @@ const CONFIG = {
   name: "Whisper Of Words",
   bootName: "REVIEW_TERMINAL",
   tagline: "မြန်မာစာအုပ်စာအညွှန်းများ စုစည်းမှု",
-  avatar: "https://avatars.githubusercontent.com/u/61192036?v=4",
+  avatar: "logo.svg",
   about: [
     "An organization that creates and shares high-quality Myanmar e-books for free, including EPUB and KFX.",
     "ဝတ္ထု၊ ဘာသာပြန်၊ ရသစာပေနဲ့ သုတစာပေ စာအုပ်စာအညွှန်းတွေကို အခမဲ့ မျှဝေပေးနေပါတယ်။",
@@ -359,7 +359,7 @@ function renderAbout() {
   el.innerHTML = `
     <p class="section-label">about.exe</p>
     <div class="about-top">
-      <div class="avatar">${CONFIG.avatar ? `<img src="${escapeAttr(CONFIG.avatar)}" alt="avatar" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);" onerror="this.remove()">` : '<span class="initials">W</span>'}</div>
+      <div class="avatar">${CONFIG.avatar ? `<img src="${escapeAttr(CONFIG.avatar)}" alt="Whisper Of Words logo" style="width:100%;height:100%;object-fit:cover;" onerror="this.remove()">` : '<span class="initials">W</span>'}</div>
       <div class="about-meta">
         <h2 class="about-name">Whisper Of Words<span class="caret"></span></h2>
         <span class="role-badge">mm Epub — Free Myanmar E-books</span>
