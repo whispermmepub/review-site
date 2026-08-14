@@ -2,6 +2,8 @@
    Whisper Of Words — Book Review Terminal
    ════════════════════════════════════════════════════════════ */
 
+window.__WOW_READY__ = true; // tells the inline failsafe that script.js parsed
+
 const CONFIG = {
   name: "Whisper Of Words",
   bootName: "REVIEW_TERMINAL",
@@ -509,7 +511,6 @@ function init() {
   switchTab("home");
   window.addEventListener("popstate", handleLocation);
   window.addEventListener("hashchange", handleLocation);
-  loadFullPosts();
   runBoot();
   setTimeout(handleLocation, 50);
 }
