@@ -8,7 +8,7 @@ const CONFIG = {
   name: "Whisper Of Words",
   bootName: "REVIEW_TERMINAL",
   tagline: "မြန်မာစာအုပ်စာအညွှန်းများ စုစည်းမှု",
-  avatar: "logo.svg",
+  avatar: "/logo.svg",
   about: [
     "An organization that creates and shares high-quality Myanmar e-books for free, including EPUB and KFX.",
     "ဝတ္ထု၊ ဘာသာပြန်၊ ရသစာပေနဲ့ သုတစာပေ စာအုပ်စာအညွှန်းတွေကို အခမဲ့ မျှဝေပေးနေပါတယ်။",
@@ -198,7 +198,7 @@ function postCard(p) {
 /* ── Full data loading ─────────────────────────────────── */
 function loadFullPosts() {
   if (fullPromise) return fullPromise;
-  fullPromise = fetch("data/posts.json")
+  fullPromise = fetch("/data/posts.json")
     .then((r) => {
       if (!r.ok) throw new Error("fetch failed");
       return r.json();
