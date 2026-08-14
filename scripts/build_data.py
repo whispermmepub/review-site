@@ -105,6 +105,12 @@ def rebuild_site(posts, site_dir):
     with open(data_path, "w", encoding="utf-8") as f:
         f.write(full_json)
 
+    meta = [{"id": p["id"], "title": p["title"], "image": p["image"], "excerpt": p["excerpt"]} for p in posts]
+    meta_json = json.dumps(meta, ensure_ascii=False, separators=(",", ":"))
+    meta_path = os.path.join(site_dir, "data", "meta.json")
+    with open(meta_path, "w", encoding="utf-8") as f:
+        f.write(meta_json)
+
     summary = [{k: v for k, v in p.items() if k != "body"} for p in posts]
     summary_json = json.dumps(summary, ensure_ascii=False, separators=(",", ":"))
 
